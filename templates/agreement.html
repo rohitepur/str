@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Rental Agreement</h2>
+<p>Fill in details to generate and sign your rental agreement.</p>
+<canvas id="signature-pad" width=400 height=200 style="border:1px solid black"></canvas>
+<script src="{{ url_for('static', filename='js/signature_pad.min.js') }}"></script>
+<script>
+var canvas = document.getElementById("signature-pad");
+var signaturePad = new SignaturePad(canvas);
+</script>
+{% endblock %}

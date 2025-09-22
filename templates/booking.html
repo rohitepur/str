@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Booking Request</h2>
+<form method="POST" action="/booking">
+    <label>Name:</label><input type="text" name="name" required><br>
+    <label>Email:</label><input type="email" name="email" required><br>
+    <label>Phone:</label><input type="text" name="phone"><br>
+    <label>Check-in:</label><input type="date" name="checkin" required><br>
+    <label>Check-out:</label><input type="date" name="checkout" required><br>
+    <label>Guests:</label><input type="number" name="guests" required><br>
+    <button type="submit">Submit Request</button>
+</form>
+{% endblock %}

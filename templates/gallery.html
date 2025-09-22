@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Gallery</h2>
+<p>Here are some pictures of our property:</p>
+<img src="{{ url_for('static', filename='images/sample1.jpg') }}" width="300">
+<img src="{{ url_for('static', filename='images/sample2.jpg') }}" width="300">
+{% endblock %}
