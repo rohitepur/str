@@ -1,11 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Rental Agreement</h2>
-<p>Fill in details to generate and sign your rental agreement.</p>
-<canvas id="signature-pad" width=400 height=200 style="border:1px solid black"></canvas>
+<h2>Review and Sign Your Rental Agreement</h2>
+
+<div class="agreement-text">
+    <pre>{{ agreement_text }}</pre>
+</div>
+
+<form method="POST" action="{{ url_for('sign_agreement', agreement_id=agreement_id) }}" id="signature-form">
+    <h3>Please Sign Below</h3>
+    <canvas id="signature-pad" width=400 height=200 style="border:1px solid #ccc; border-radius: 5px;"></canvas>
+    <br>
+    <button type="button" id="clear-button">Clear</button>
+    <button type="submit">Save Signature and Download Agreement</button>
+    <input type="hidden" name="signature" id="signature-data">
+</form>
+
 <script src="{{ url_for('static', filename='js/signature_pad.min.js') }}"></script>
 <script>
-var canvas = document.getElementById("signature-pad");
-var signaturePad = new SignaturePad(canvas);
+document.addEventListener("DOMContentLoaded", function() {
+    var canvas = document.getElementById("signature-pad");
+    var signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgb(255, 255, 255)'
+    });
+
+    var form = document.getElementById("signature-form");
+    var clearButton = document.getElementById("clear-button");
+    var signatureDataInput = document.getElementById("signature-data");
+
+    form.addEventListener("submit", function(event) {
+        if (signaturePad.isEmpty()) {
+            alert("Please provide a signature first.");
+            event.preventDefault(); // Stop form submission
+        } else {
+            signatureDataInput.value = signaturePad.toDataURL("image/png");
+        }
+    });
+
+    clearButton.addEventListener("click", function() {
+        signaturePad.clear();
+    });
+});
 </script>
 {% endblock %}
+

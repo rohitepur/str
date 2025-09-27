@@ -1,0 +1,19 @@
+This Rental Agreement is made and entered into on this day between the Property Owner and the Guest, {name}.
+
+Property: Cozy and modern home in Exton, PA.
+Guest Name: {name}
+Guest Email: {email}
+
+Check-in Date: {check_in_date}
+Check-out Date: {check_out_date}
+
+Total Guests: {number_of_guests}
+
+TERMS AND CONDITIONS:
+1. The guest agrees to abide by all house rules.
+2. No smoking is allowed inside the property.
+3. Pets are not permitted unless prior approval has been granted.
+4. The guest is responsible for any damages to the property caused during their stay.
+
+By signing below, the guest acknowledges that they have read, understood, and agree to the terms and conditions of this rental agreement.
+
