@@ -1,6 +1,152 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Your Perfect Stay Awaits</h2>
-<p>Located in a gated community in Exton, PA. Cozy and modern amenities.</p>
-<a href="https://airbnb.com/your-listing-link" target="_blank">Book Now on Airbnb</a>
+<div class="page-content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+   {% endwith %}
+    <section class="about-section">
+        <h3>5-Bedroom Lakefront, private beach wifi AC boat & kayaks near ski, casino</h3>
+        <a href="https://airbnb.com/h/poconocountrylakehouse" target="_blank" class="cta-button">Book on Airbnb</a>
+        <p>
+            Spacious 5-bedroom lake house near Camelback, Mount Airy Casino, Kalahari Resorts, and premium shopping outlets. Accommodates 12 comfortably with 1 king bed, 3 queens, and 2 bunk beds (4 beds). Enjoy a private beach with 3 kayaks and a boat, perfect for fishing and lake adventures. Relax by the fire pit next to the lake or let the kids have fun in the sandbox.
+        </p>
+          
+        <p>
+            This 2,600 square-foot home offers plenty of space for your group, featuring 3 full baths and 1 half bath, a large jetted tub in the master bath, and a pool table with games for added fun. Strong WiFi allows for streaming and work-from-home needs, with televisions in every room ready for your favorite online subscriptions.
+        </p>
+          
+        <p>
+            <strong>Important Information:</strong><br>
+            Located in a gated community; renter email, phone number, mailing address, guest names, vehicle information, and a signed rental agreement are required to gain entry into the Pocono Country Place Community.
+        </p>
+          
+        <p>
+            <strong>Fees Information:</strong><br>
+            Host fees: $250 per stay (includes cleaning fee and a $50 short-term rental fee paid to the HOA).
+        </p>
+          
+          <p>
+            <strong>Pocono Country Place Amenities:</strong><br>
+            - Community pool, beach, miniature golf, and boat rentals available for additional cost<br>
+            - Lakeside Cafe<br>
+            - Tennis and basketball courts<br>
+            - Playground<br>
+            <a href="https://apcppoa.com/cgi-bin/filemanager.pl?filename=about/amenties.htm" target="_blank">More Info..</a>
+          </p>
+          
+    </section>
+
+    <section class="gallery-section">
+        <h3>Photo Gallery</h3>
+        <div class="gallery-grid">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-48-02_020 2.jpeg') }}" alt="Property photo 1">
+            <img src="{{ url_for('static', filename='images/2024-10-28_17-30-42_698.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-48-10_917.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-50-55_380.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-51-08_712.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-51-25_065.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-51-40_887.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-51-50_201.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-52-13_390.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-09-23_11-53-04_946.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-22-08_950.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-32-21_458.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-33-55_285.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-34-13_069.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-43-06_624.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-43-56_149.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-44-08_923.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-46-07_691.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-48-01_812.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-52-44_014.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_10-57-03_181.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_11-00-28_083.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-02_11-38-22_715.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-19_13-32-47_436.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-19_15-58-31_044.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-19_16-01-44_835.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-19_17-18-15_999.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-27_17-24-08_796.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-28_09-40-49_189.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-10-28_17-30-42_698.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-11-04_15-43-38_513.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-11-18_17-09-30_291.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-17-25_844.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-17-39_661.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-19-14_030.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-19-46_900.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-21-32_987.jpeg') }}" alt="Property photo 2">
+            <img src="{{ url_for('static', filename='images/2024-12-09_12-21-58_353.jpeg') }}" alt="Property photo 2">
+
+            <!-- Add more images here, and ensure they are in the static/images folder -->
+        </div>
+    </section>
+
+    <section class="amenities-section">
+        <h3>What This Place Offers</h3>
+        <ul class="amenities-list">
+            <li>Lake front</li>
+            <li>Full Kitchen</li>
+            <li>Fast WiFi</li>
+            <li>Free parking on premises</li>
+            <li>Indoor fireplace</li>
+            <li>Dedicated workspace</li>
+            <li>TV with streaming services</li>
+            <li>Washer / Dryer</li>
+            <li>Playpen</li>
+            <li>kayaks and paddle boat</li>
+        </ul>
+    </section>
+
+    <section class="rules-section">
+        <h3>House Rules</h3>
+        <ul>
+            <li>Primary renter must be 21 years or older</li>
+            <li>Check-in after 4:00 PM</li>
+            <li>Check-out before 11:00 AM</li>
+            <li>Maximum of 12 guests</li>
+            <li>No smoking indoors</li>
+            <li>No large parties or events</li>
+            <li>Quiet hours after 10:00 PM</li>
+        </ul>
+    </section>
+
+    <section class="booking-section">
+        <h3>Request a Direct Booking</h3>
+        <p>Book directly with owner for a 10% discount on the total booking price on airbnb (less taxes). Fill out the form below and we will get back to you with a personalized quote and booking link.</p>
+        <form action="{{ url_for('request_booking') }}" method="post" class="booking-form" style="text-align: left; margin-top: 2rem; background-color: transparent; box-shadow: none; padding: 0;">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input id="name" type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="email" type="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input id="phone" type="text" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="check_in_date">Check-in:</label>
+                <input id="check_in_date" type="date" name="check_in_date" required>
+            </div>
+            <div class="form-group">
+                <label for="check_out_date">Check-out:</label>
+                <input id="check_out_date" type="date" name="check_out_date" required>
+            </div>
+            <div class="form-group">
+                <label for="number_of_guests">Number of Guests:</label>
+                <input id="number_of_guests" type="number" name="number_of_guests" min="1" required>
+            </div>
+            <button type="submit">Send Request</button>
+        </form>
+    </section>
+</div>
 {% endblock %}

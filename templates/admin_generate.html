@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Generate Pre-filled Booking Link</h2>
+<p>Fill in any information you want to pre-populate for the guest. A unique, secure link will be generated for them.</p>
+
+{% if generated_link %}
+<div class="generated-link-container" style="margin: 2rem 0; padding: 1rem; border: 1px solid #007bff; border-radius: 5px; background-color: #e7f3ff;">
+    <h4>Link Generated Successfully!</h4>
+    <p>Share this link with your guest:</p>
+    <input type="text" value="{{ generated_link }}" readonly style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; box-sizing: border-box;">
+    <p><a href="{{ url_for('generate_link') }}">Generate another link</a></p>
+</div>
+{% endif %}
+
+<form action="/admin/generate" method="post" class="booking-form">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" type="text" name="name">
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input id="phone" type="text" name="phone">
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="number_of_guests">Total Guests:</label>
+        <input id="number_of_guests" type="number" name="number_of_guests">
+    </div>
+    <div class="form-group">
+        <label for="check_in_date">Check-in:</label>
+        <input id="check_in_date" type="date" name="check_in_date">
+    </div>
+    <div class="form-group">
+        <label for="check_out_date">Check-out:</label>
+        <input id="check_out_date" type="date" name="check_out_date">
+    </div>
+    <button type="submit">Generate Link</button>
+</form>
+{% endblock %}
+

@@ -8,7 +8,7 @@ class PDF(FPDF):
     """Custom PDF class to include a header and footer."""
     def header(self):
         self.set_font('Arial', 'B', 16)
-        self.cell(0, 10, text='Rental Agreement', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+        self.cell(0, 10, text='SHORT TERM RENTER AGREEMENT for Pocono Country Lake House', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
         self.ln(10)
 
     def footer(self):

@@ -1,19 +1,79 @@
-This Rental Agreement is made and entered into on this day between the Property Owner and the Guest, {name}.
+This Rental Agreement is made and entered into on this day between the Property Owner Rohit Epur and the Guest, {name}.
 
-Property: Cozy and modern home in Exton, PA.
+Property: Pocono Country Lake House at 6035 Boardwalk Dr, Tobyhanna PA 18466
+
 Guest Name: {name}
 Guest Email: {email}
+Guest Phone: {phone}
+Guest Address: {address}
 
 Check-in Date: {check_in_date}
 Check-out Date: {check_out_date}
-
 Total Guests: {number_of_guests}
 
-TERMS AND CONDITIONS:
-1. The guest agrees to abide by all house rules.
-2. No smoking is allowed inside the property.
-3. Pets are not permitted unless prior approval has been granted.
-4. The guest is responsible for any damages to the property caused during their stay.
+Guests and Vehicles staying at the house (max capacity is 12)
+Children under 12 years old:
+{children}
 
-By signing below, the guest acknowledges that they have read, understood, and agree to the terms and conditions of this rental agreement.
+Guests older than 12 years old:
+{adults}
 
+Vehicles parked at the house:
+{vehicles}
+
+This Renter Agreement ("Agreement") is made and effective {today} ("Agreement Date") between Rohit Epur ("Owner and/or Manager") and {name} ("Guest") regarding the property known as Pocono Country Lake House ("Rental Property") which is located at:
+
+6035 Boardwalk Dr
+Tobyhanna, PA 18466
+
+This Agreement applies to the Guest's stay at Rental Property from {check_in_date} to {check_out_date} but also applies to any other dates which may be included if the reservation is changed. This Agreement applies to all members of the Guest's party no matter the age or affiliation ("Group"). Guest acknowledges that Guest is responsible for sharing the renter agreement, and its requirements, with all members of the Guest's party and anyone else permitted onto the Rental Property by the Guest.
+
+In consideration of the rent received and the mutual promises contained herein, Owner of the Rental Property does hereby lease and rent to Guest(s) such Rental Property under the following terms and conditions:
+
+1. Guest agrees to abide by all rules and regulations contained herein or posted on the premises related to the Rental Property. Guests obligations include but are not limited to keeping the premises as clean and safe as the conditions of the premises permit and causing no unsafe or unsanitary conditions in the common area and remainder of the premises that Guest uses. Guests agree not to use the premises for any commercial activities or purpose that violates any criminal law or governmental regulation. Guest's breach of any duty contained in this paragraph shall be considered material and shall result in the termination of guest occupancy with no refund of any kind.
+
+2. In no event shall the Rental Property be occupied by more persons than the capacity of the property as stated on the web site or the confirmation letter, without prior approval by Owner. No fraternities, school, civic, or other non-family groups are allowed unless Owner grants prior approval. In no event shall Guests assign or sublet the Rental Property in whole or in part. Violations of these rules are grounds for expedited eviction with no refund of any kind. Guests hereby acknowledge that all occupants of the property agree to be bound by the Governing documents of Pocono Country place HOA and grant specific permission to Owner to enter premises at any time for inspection purposes should Owner reasonably believe that Guests are causing or have caused any damage to Rental Property. Guest further agrees to grant Owner access to Rental Property for purposes of maintenance and repair. If listed "For Sale", Guests agree to grant access by scheduled appointment upon notification.
+
+3. In the event Guest wishes to terminate this agreement, Travel Insurance, Damage Protection and any processing or administrative fees are non-refundable. The refund policy is as follows: Moderate: Free cancellation at least 5 days before check-in. After that, cancel before check-in and get a 50% refund, minus the first night and service fee.
+
+4. A payment of 100% is taken by Owner at the time of the booking. Any remaining balance must be paid 7 days prior to the arrival date, or this Agreement may be cancelled by the sole option of the Owner. An automatic credit card payment for the remaining balance will be scheduled by the Owner to be made 7 days prior to the arrival date. The credit card of the first payment is used if a credit card was provided. If the automatic payment fails for any reason, it is the responsibility of the Guest to make sure that the remaining balance is promptly paid in full, or the reservation will be canceled with no refund of payments made. All policies contained in this Agreement shall apply equally to payments made by credit card, check or cash and whether made via website, by phone or in person. Any refunds due to Guests from a credit card payment will be refunded by credit card transaction; all other refunds will be made within 30 days by check.
+
+5. A security deposit is required ("Security Deposit") and will be automatically reserved for the booking. The automatic reserve is conducted by putting a hold or charge on the Guest's credit card for the amount of $200.00 exactly 0 day(s) prior to the arrival date. The credit card of the last successful payment will be used. If there are no successful credit card payments, it is the responsibility of the Guest to send $200.00 by check to the Owner to satisfy the Security Deposit requirement. If, at the end of the rental period, the rental property is returned undamaged beyond normal wear and tear, the Security Deposit will be released in full within 5 days. In the event of any damages, Owner will provide Guest with a full accounting of expenses incurred and deductions made from the Security Deposit. Should the damages exceed the amount of the Security Deposit, Guest agrees to pay the balance within 5 business days after receiving notification. Deductions from Security Deposit may include, but are not limited to: excess cleaning fee, hot tub draining and refilling fee, trash removal fee, missing item replacement costs, damaged item replacement or repair costs, repair costs of buildings or grounds, or other service call fees. Owner is under no obligation to use the least expensive means of restoration.
+
+6. Regular payments and security deposits for the booking will be displayed as ROHIT EPUR on the Guest's credit card statement.
+
+7. Guests must obtain permission from the Owner to have pets on the Rental Property. If permission is not given by the Owner, any pet(s) found in or about the Rental Property will be grounds for expedited eviction and forfeiture of all monies paid.
+
+8. Guests must inform the Owner of their intention to bring children and the specific number. A child is defined as any person under the age of 18.
+
+9. No refunds will be provided due to inoperable appliances, pools, hot tubs, elevators, etc. The Owner will make every reasonable effort to assure that such appliances will be and remain in good working order. No refunds will be given due to power blackouts, water shortage, flooding, snow, construction at adjacent properties, or mandatory evacuations of the area by county officials due to hurricanes or other potentially dangerous situations arising from acts of god or nature.
+
+10. Guest is responsible for all shipping costs for any Lost and Found items that Owner is requested to return to Guest. Items found and not claimed within 30 days will be disposed of at the discretion of Owner.
+
+11. If linens or towels are rented from Owner or supplied with Rental Property, Guest is responsible for lost or damaged items at the cost of two (2) times the published standard rental price for such damaged or lost linens or towels.
+
+12. In the event Owner is unable to make Rental Property available for any reason other than described above or a reasonable substitute as determined by Owner, Guest agrees that Owner's sole liability as a result of this unavailability is to provide a full refund of all monies paid under this Agreement and Guest expressly acknowledges that in no event shall Owner be held liable for any special or consequential damages which result from this unavailability. Guest also agrees to indemnify Owner from and against liability for injury to Guest or any other person occupying Rental Property resulting from any cause whatsoever including, but not limited to, injury sustained as a result of use of the phone, spa, hot tub, sauna, whirlpool tub, pool, exercise equipment, elevator, etc. except only such a personal injury caused by the gross negligence or intentional acts of the Owner.
+
+13. Owner may terminate this Agreement upon the breach of any of the terms hereof by Guest. Guest shall not be entitled to the return of any rental monies paid under the terms of this Agreement and shall vacate the Property immediately.
+
+14. Agreement shall be enforced under the laws of the state within which the Rental Property is located, including any applicable rental acts of that state, and represents the entire Agreement. Any amendments must be in writing and signed by both parties. In the event of a dispute, legal action may only be instituted in the county within which the Rental Property is located. If any part of this Agreement shall be deemed unenforceable by law, that part shall be omitted from this Agreement without affecting the remaining Agreement.
+
+15. The Rental Property offers access to recreational and water activities, including but not limited to canoes, and swimming. Guest fully understands and acknowledges that outdoor recreational and water activities have inherent risks, dangers and hazards. Participation in such activities and/or use of equipment may result in injury or illness including, but not limited to bodily injury, disease, strains, fractures, partial and/or total paralysis, death or other ailments that could cause serious disability. Guest agrees to fully indemnify and hold harmless the Owner and any and all agents, employees, or contractors for any injury or damage caused by these activities, whether caused by the negligence of the Owners, the negligence of the participants, the negligence of others, accidents, breaches of contract, the forces of nature or other causes foreseeable or unforeseeable. Guest hereby assume all risks and dangers and all responsibility for any losses and/or damages, whether caused in whole or in part by the negligence or other conduct of the Owners or by any other person. Guest hereby voluntarily agree to release, waive, discharge, hold harmless, defend and indemnify Owner and any and all agents, employees, or contractors from any and all claims, actions or losses for bodily injury, property damage, wrongful death, loss of services or otherwise which may arise out of my use of Rental Property facilities, equipment, or activities. Guest further assumes full responsibility for the actions of any and all persons whom he may allow to enter the property during the rental period and indemnifies Owner from any and all claims arising from such other persons.
+
+NOW, THEREFORE, in consideration of the mutual agreements and covenants herein contained, Guest has read and agreed to the following:
+
+I understand the rules and rental conditions upon which I am agreeing to rent accommodations, equipment, and use of the property. I acknowledge and accept that the sole responsibility for safety lies with the participant. In agreeing to this, I acknowledge that outdoor activities and exposure to the natural elements and animals can be dangerous and sometimes result in injury and even death. Steps and decks can be slippery, animals and insects can threaten and infect or injure, exposure to the elements can cause hypothermia, sunburn, among other risks inherent in participating in camping, outdoor and water activities. I know that alcohol and/or drugs do not mix safely with any outdoor activity.
+
+I am over the age of 21 and assume responsibility for all in the Group, and the Group is visiting the property and using the equipment and is engaging in activities or events at the Group's risk. I hereby assume all legal responsibility for bodily injury to me or to any person on the property as a result of my visit and use, operation or possession of equipment hired or loaned to me. Acknowledging this, I accept complete responsibility for the Group, and the Group is visiting the property and using the equipment and is engaging in activities or events at the Group's risk.
+
+I will abide by the rules and accept these rental conditions:
+
+The property I rent will be returned in the same condition in which it was rented and I will be responsible for all damage and/or loss that occurs during my rental period.
+
+I agree to hold harmless and to indemnify the Owner of the Rental Property against all loss, damage, expense and penalty on account of personal injury or property damage to the rental dwellers, the undersigned or to any minor child or children in the charge of the undersigned, howsoever rising, whether by act or acts or failure to act of the employees, owners or animals of the said company or property owners or not.
+
+I acknowledge receipt of the property in good order and condition (if found otherwise per my arrival I will contact Owner immediately) and further agree that the Owner of the Rental Property shall not be liable for consequential damages of any kind or nature from whatever cause arising, whether property or equipment is loaned or rented.
+
+I enter into agreement freely with the Owner of the Rental Property at my own risk, acknowledging the risks inherent in indoor and outdoor activities and assume any and all responsibility for the minor children and myself in my charge.
+
+All parties agree to and will comply with Federal, State and County pollution laws and any other applicable laws and regulations.

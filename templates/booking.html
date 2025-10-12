@@ -1,14 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Request to Book</h2>
-<form action="/booking" method="post">
-    <label>Name:</label><input type="text" name="name" required><br>
-    <label>Email:</label><input type="email" name="email" required><br>
-    <label>Phone:</label><input type="text" name="phone"><br>
-    <label>Check-in:</label><input type="date" name="check_in_date" required><br>
-    <label>Check-out:</label><input type="date" name="check_out_date" required><br>
-    <label>Guests:</label><input type="number" name="number_of_guests" required><br>
-    <button type="submit">Submit Request</button>
+<h2>Booking Details</h2>
+<form action="/booking" method="post" class="booking-form">
+    {% if token %}
+    <input type="hidden" name="token" value="{{ token }}">
+    {% endif %}
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" type="text" name="name" value="{{ name or '' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input id="email" type="email" name="email" value="{{ email or '' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input id="phone" type="text" name="phone" value="{{ phone or '' }}">
+    </div>
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="3">{{ address or '' }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="number_of_guests">Total Guests:</label>
+        <input id="number_of_guests" type="number" name="number_of_guests" value="{{ number_of_guests or '' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="adults">Guest names (Add guest names older than 12 years):</label>
+        <textarea id="adults" name="adults" rows="4">{{ adults or '' }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="children">Children names (Add Children names 12 years and under):</label>
+        <textarea id="children" name="children" rows="4">{{ children or '' }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="vehicles">Vehicles (Add vehicle details entering the community):</label>
+        <textarea id="vehicles" name="vehicles" rows="3">{{ vehicles or '' }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="check_in_date">Check-in:</label>
+        <input id="check_in_date" type="date" name="check_in_date" value="{{ check_in_date or '' }}" required>
+    </div>
+    <div class="form-group">
+        <label for="check_out_date">Check-out:</label>
+        <input id="check_out_date" type="date" name="check_out_date" value="{{ check_out_date or '' }}" required>
+    </div>
+    <button type="submit">Review and sign Renter agreement</button>
 </form>
 {% endblock %}
-

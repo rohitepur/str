@@ -3,3 +3,212 @@ header { background:#333; color:white; padding:15px; text-align:center; }
 nav a { margin:0 10px; color:white; text-decoration:none; }
 main { padding:20px; }
 footer { background:#f4f4f4; text-align:center; padding:10px; margin-top:20px; }
+
+/* Modern Booking Form Styles */
+.booking-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.booking-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.booking-form input[type="text"],
+.booking-form input[type="email"],
+.booking-form input[type="date"],
+.booking-form input[type="number"],
+.booking-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important for padding and width */
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.booking-form input:focus,
+.booking-form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.booking-form button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.booking-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Home Page Styles */
+.hero {
+    background-color: #460a0a;
+    color: rgb(189, 128, 128)33);
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    background-color: #007bff;
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+.cta-button.secondary {
+    background-color: #6c757d;
+}
+.cta-button.secondary:hover {
+    background-color: #5a6268;
+}
+
+.page-content {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.page-content section {
+    margin-bottom: 3rem;
+}
+
+.page-content h3 {
+    font-size: 1.8rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.gallery-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.gallery-link a {
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Amenities & Rules */
+.amenities-list, .rules-section ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.amenities-list li, .rules-section li {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+}
+
+/* Booking Section */
+.booking-section {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.booking-section .cta-button {
+    margin: 0.5rem;
+}
+
+
+/* Full Gallery Page Styles */
+.gallery-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.gallery-grid-full img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.gallery-grid-full img:hover {
+    transform: scale(1.03);
+}
+
+/* Flash Messages */
+.alert {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
