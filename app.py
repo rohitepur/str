@@ -7,6 +7,8 @@ import datetime
 import smtplib
 import ssl
 from email.message import EmailMessage
+# Add authentication import
+from flask_httpauth import HTTPBasicAuth
 
 # Import the new modular function
 from agreement_generator import create_agreement_pdf
@@ -18,6 +20,17 @@ app.secret_key = os.urandom(24)
 
 # Ensure the 'agreements' directory exists for saving signed PDFs
 os.makedirs("agreements", exist_ok=True)
+
+# Initialize Flask-HTTPAuth
+auth = HTTPBasicAuth()
+
+@auth.verify_password
+def verify_password(username, password):
+    """Verify username and password against environment variables."""
+    admin_user = os.environ.get('ADMIN_USERNAME')
+    admin_pass = os.environ.get('ADMIN_PASSWORD')
+    if username == admin_user and password == admin_pass:
+        return username
 
 # Use a dictionary as a simple in-memory store for pending agreements.
 # In a production app, you would use a database for persistence.
@@ -123,6 +136,7 @@ def guest_booking(token):
     return render_template("booking.html", token=token, **prefill_data)
 
 @app.route("/admin/generate", methods=["GET", "POST"])
+@auth.login_required
 def generate_link():
     """An admin page to create a pre-filled link for a guest."""
     if request.method == "POST":

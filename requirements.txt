@@ -1,2 +1,3 @@
 flask
 fpdf2
+Flask-HTTPAuth
