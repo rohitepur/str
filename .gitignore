@@ -1,0 +1,24 @@
+# Environment
+# Ignore the virtual environment folder
+venv/
+
+# Secrets
+# Ignore the file containing environment variables and secrets
+.env
+
+# Python cache
+# Ignore Python bytecode files and cache directories
+__pycache__/
+*.pyc
+
+# Application Data
+# Ignore the directory where generated PDF agreements are stored
+agreements/
+
+# Database
+# Ignore the SQLite database file
+*.db
+
+# OS-specific files
+# Ignore macOS folder attributes
+.DS_Store

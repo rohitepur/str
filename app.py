@@ -9,17 +9,49 @@ import ssl
 from email.message import EmailMessage
 # Add authentication import
 from flask_httpauth import HTTPBasicAuth
-
+from io import BytesIO
+# Add database and S3 client imports
+from flask_sqlalchemy import SQLAlchemy
+import boto3
+# To load environment variables from a .env file
+from dotenv import load_dotenv
+from email import policy
 # Import the new modular function
 from agreement_generator import create_agreement_pdf
+import boto3
 
 app = Flask(__name__)
+
+# Initialize S3 client
+s3 = boto3.client('s3')
+
+# load environment variables 
+load_dotenv()   
 
 # Add a secret key for flash messages
 app.secret_key = os.urandom(24)
 
-# Ensure the 'agreements' directory exists for saving signed PDFs
+# --- DATABASE SETUP ---
+# Configure the database. Use DATABASE_URL from env if available, otherwise fallback to a local sqlite file.
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Ensure the 'agreements' directory exists for local fallback storage
 os.makedirs("agreements", exist_ok=True)
+
+# --- DATABASE MODELS ---
+class PreBooking(db.Model):
+    """Stores temporary data for pre-filled booking links."""
+    token = db.Column(db.String(36), primary_key=True)
+    data = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+class PendingAgreement(db.Model):
+    """Stores data for an agreement that is awaiting a signature."""
+    id = db.Column(db.String(36), primary_key=True)
+    data = db.Column(db.JSON)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 # Initialize Flask-HTTPAuth
 auth = HTTPBasicAuth()
@@ -32,10 +64,9 @@ def verify_password(username, password):
     if username == admin_user and password == admin_pass:
         return username
 
-# Use a dictionary as a simple in-memory store for pending agreements.
-# In a production app, you would use a database for persistence.
-pending_agreements = {}
-pre_bookings = {} # new store for pre booking data
+# Create database tables if they don't exist
+with app.app_context():
+    db.create_all()
 
 @app.route("/")
 def home():
@@ -77,17 +108,16 @@ def request_booking():
         f"You can use the admin panel to generate a pre-filled booking link for them."
     )
     
-    em = EmailMessage()
+    em = EmailMessage(policy=policy.SMTPUTF8)
     em['From'] = email_sender
     em['To'] = email_receiver
     em['Subject'] = subject
     em.set_content(body)
-
     context = ssl.create_default_context()
     try:
         with smtplib.SMTP_SSL(email_host, email_port, context=context) as smtp:
             smtp.login(email_sender, email_password)
-            smtp.sendmail(email_sender, email_receiver, em.as_string())
+            smtp.send_message(em)
         flash("Thank you for your request! The owner will be in touch with you shortly.", "success")
     except Exception as e:
         print(f"Error sending email: {e}")
@@ -99,16 +129,22 @@ def request_booking():
 def booking():
     if request.method == "POST":
         data = request.form.to_dict()
-
-        # If this booking came from a generated link, we can remove the temporary
-        # pre-booking data. We use pop to also remove the token from the data dict.
+        
+       # If this booking came from a generated link, remove the temporary pre-booking data.
         token = data.pop('token', None)
         if token:
-            # This was a pre-filled booking, clean up the pre_bookings store.
-            pre_bookings.pop(token, None)
+            pre_booking_to_delete = PreBooking.query.get(token)
+            if pre_booking_to_delete:
+                db.session.delete(pre_booking_to_delete)
 
         if not data.get("name") or not data.get("email"):
             abort(400, "Name and email are required fields.")
+        
+        if not data.get("adults") or not data.get("adults").strip():
+            abort(400, "Guest names (adults over 12) are required.")
+        
+        if not data.get("vehicles") or not data.get("vehicles").strip():
+            abort(400, "Vehicle information is required.")
     
         # Add the current date to the data dictionary for the agreement template.
         data['today'] = datetime.date.today().strftime("%B %d, %Y")
@@ -116,8 +152,10 @@ def booking():
         # Generate a unique ID for this agreement
         agreement_id = str(uuid.uuid4())
         
-        # Store the booking data temporarily, associated with the new ID
-        pending_agreements[agreement_id] = data
+        # Store the booking data in the database, associated with the new ID
+        new_agreement = PendingAgreement(id=agreement_id, data=data)
+        db.session.add(new_agreement)
+        db.session.commit() 
         
         # Redirect the user to the new agreement signing page
         return redirect(url_for("agreement", agreement_id=agreement_id))
@@ -128,11 +166,12 @@ def booking():
 @app.route("/book/<token>")
 def guest_booking(token):
     """This is the unique link the guest will use."""
-    prefill_data = pre_bookings.get(token)
-    if not prefill_data:
+    pre_booking = PreBooking.query.get(token)
+    if not pre_booking:
         abort(404, "This booking link is invalid or has already been used.")
     
     # Pass the data and the token to the booking template
+    prefill_data = pre_booking.data
     return render_template("booking.html", token=token, **prefill_data)
 
 @app.route("/admin/generate", methods=["GET", "POST"])
@@ -142,8 +181,11 @@ def generate_link():
     if request.method == "POST":
         data = request.form.to_dict()
         token = str(uuid.uuid4())
-        pre_bookings[token] = data
         
+        # Store the pre-booking data in the database
+        new_pre_booking = PreBooking(token=token, data=data)
+        db.session.add(new_pre_booking)
+        db.session.commit()
         link = url_for('guest_booking', token=token, _external=True)
         return render_template("admin_generate.html", generated_link=link)
 
@@ -152,10 +194,11 @@ def generate_link():
 
 @app.route("/agreement/<agreement_id>")
 def agreement(agreement_id):
-    agreement_data = pending_agreements.get(agreement_id)
-    if not agreement_data:
+    pending = PendingAgreement.query.get(agreement_id)
+    if not pending:
         abort(404, "Agreement not found or has expired.")
 
+    agreement_data = pending.data
     with open("agreement_template.txt", "r") as f:
         template_text = f.read()
 
@@ -168,29 +211,51 @@ def agreement(agreement_id):
 
 @app.route("/sign/<agreement_id>", methods=["POST"])
 def sign_agreement(agreement_id):
-    agreement_data = pending_agreements.pop(agreement_id, None)
-    if not agreement_data:
+    pending = PendingAgreement.query.get(agreement_id)
+    if not pending:
         abort(404, "Agreement not found or has expired.")
 
+    agreement_data = pending.data
+    db.session.delete(pending)
+    db.session.commit()
     signature_data_url = request.form.get("signature")
 
     with open("agreement_template.txt", "r") as f:
         template_text = f.read()
 
+    # Generate the PDF in memory
     pdf_buffer = create_agreement_pdf(agreement_data, template_text, signature_data_url)
     
+    # Get the raw bytes of the PDF. This is safer than passing the buffer around.
+    pdf_bytes = pdf_buffer.getvalue()
+    pdf_buffer.close()
+
     safe_name = secure_filename(agreement_data.get("name", "guest"))
     filename = f"{safe_name}_signed_agreement.pdf"
+ 
+    # --- PERSISTENT FILE STORAGE ---
+    # Upload to a cloud service like AWS S3 instead of saving locally.
+    s3_bucket = os.environ.get('S3_BUCKET_NAME')
+    if s3_bucket:
+        try:
+            s3.put_object(
+                Body=pdf_bytes,
+                Bucket=s3_bucket,
+                Key=f"agreements/{filename}",
+                ContentType='application/pdf'
+            )
+            flash("Agreement successfully uploaded to secure storage.", "info")
+        except Exception as e:
+            print(f"Error uploading to S3: {e}")
+            flash("Critical: Could not save the signed agreement to cloud storage.", "error")
+    else:
+        # Fallback to local storage if S3 is not configured (for development)
+        print("WARNING: S3_BUCKET_NAME not set. Saving agreement to local 'agreements/' directory.")
+        file_path = os.path.join("agreements", filename)
+        with open(file_path, "wb") as f:
+            f.write(pdf_bytes)
 
-    # Save a copy of the signed agreement to the server
-    file_path = os.path.join("agreements", filename)
-    with open(file_path, "wb") as f:
-        f.write(pdf_buffer.getbuffer())
-
-    # Reset the buffer's position to the beginning for send_file
-    pdf_buffer.seek(0)
-
-    return send_file(pdf_buffer, as_attachment=True, download_name=filename, mimetype='application/pdf')
+    return send_file(BytesIO(pdf_bytes), as_attachment=True, download_name=filename, mimetype='application/pdf')
 
 if __name__ == "__main__":
     app.run(debug=True)

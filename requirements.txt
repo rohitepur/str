@@ -1,3 +1,9 @@
-flask
-fpdf2
+Flask
 Flask-HTTPAuth
+Flask-SQLAlchemy
+boto3
+python-dotenv
+fpdf
+gunicorn
+psycopg2-binary
+Werkzeug

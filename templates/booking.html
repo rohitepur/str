@@ -26,16 +26,16 @@
         <input id="number_of_guests" type="number" name="number_of_guests" value="{{ number_of_guests or '' }}" required>
     </div>
     <div class="form-group">
-        <label for="adults">Guest names (Add guest names older than 12 years):</label>
-        <textarea id="adults" name="adults" rows="4">{{ adults or '' }}</textarea>
+        <label for="adults">Guest names (Required - List all guests older than 12 years, one per line):</label>
+        <textarea id="adults" name="adults" rows="4" required placeholder="Enter full names of all guests over 12 years old, one name per line">{{ adults or '' }}</textarea>
     </div>
     <div class="form-group">
-        <label for="children">Children names (Add Children names 12 years and under):</label>
-        <textarea id="children" name="children" rows="4">{{ children or '' }}</textarea>
+        <label for="children">Children names (List all children 12 years and under, one per line):</label>
+        <textarea id="children" name="children" rows="4" placeholder="Enter full names of all children 12 and under, one name per line (leave blank if no children)">{{ children or '' }}</textarea>
     </div>
     <div class="form-group">
-        <label for="vehicles">Vehicles (Add vehicle details entering the community):</label>
-        <textarea id="vehicles" name="vehicles" rows="3">{{ vehicles or '' }}</textarea>
+        <label for="vehicles">Vehicle information (Required - List all vehicles entering the community):</label>
+        <textarea id="vehicles" name="vehicles" rows="3" required placeholder="Enter vehicle details: Make, Model, Year, License Plate (one vehicle per line)">{{ vehicles or '' }}</textarea>
     </div>
     <div class="form-group">
         <label for="check_in_date">Check-in:</label>

@@ -1,4 +1,4 @@
-from fpdf import FPDF, XPos, YPos
+from fpdf import FPDF
 from io import BytesIO
 import tempfile
 import base64
@@ -8,13 +8,13 @@ class PDF(FPDF):
     """Custom PDF class to include a header and footer."""
     def header(self):
         self.set_font('Arial', 'B', 16)
-        self.cell(0, 10, text='SHORT TERM RENTER AGREEMENT for Pocono Country Lake House', new_x=XPos.LMARGIN, new_y=YPos.NEXT, align='C')
+        self.cell(0, 10, 'SHORT TERM RENTER AGREEMENT for Pocono Country Lake House', 0, 1, 'C')
         self.ln(10)
 
     def footer(self):
         self.set_y(-15)
         self.set_font('Arial', 'I', 8)
-        self.cell(0, 10, text=f'Page {self.page_no()}', align='C')
+        self.cell(0, 10, f'Page {self.page_no()}', 0, 0, 'C')
 
 def create_agreement_pdf(data, template_text, signature_data_url=None):
     """
@@ -40,7 +40,7 @@ def create_agreement_pdf(data, template_text, signature_data_url=None):
     # If a signature is provided, decode it and add it to the PDF
     if signature_data_url:
         pdf.set_font('Arial', 'B', 12)
-        pdf.cell(0, 10, text="Signature:", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, 10, "Signature:", 0, 1)
         
         temp_img_path = ""
         try:
@@ -54,6 +54,8 @@ def create_agreement_pdf(data, template_text, signature_data_url=None):
             # Ensure the temporary file is always deleted
             if temp_img_path and os.path.exists(temp_img_path):
                 os.remove(temp_img_path)
-    # pdf.output(dest='S') returns a bytearray, which doesn't need encoding.
-    # Pass it directly to BytesIO.
-    return BytesIO(pdf.output())
+    # Get PDF as bytes
+    pdf_output = pdf.output(dest='S')
+    if isinstance(pdf_output, str):
+        pdf_output = pdf_output.encode('latin1')
+    return BytesIO(pdf_output)
