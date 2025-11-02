@@ -11,9 +11,7 @@ venv/
 __pycache__/
 *.pyc
 
-# Application Data
-# Ignore the directory where generated PDF agreements are stored
-agreements/
+
 
 # Database
 # Ignore the SQLite database file

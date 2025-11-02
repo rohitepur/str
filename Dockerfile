@@ -7,6 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE $PORT
+RUN chmod +x start.sh
 
-CMD gunicorn --bind 0.0.0.0:$PORT app:app
+CMD ["./start.sh"]

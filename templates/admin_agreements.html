@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Signed Agreements</h2>
+
+{% if agreements %}
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f5f5f5;">
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Date</th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Name</th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Email</th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Filename</th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for agreement in agreements %}
+        <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.name }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.email }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.filename }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">
+                <a href="{{ url_for('download_agreement', agreement_id=agreement.id) }}" 
+                   style="background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 12px;">
+                   Download PDF
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No signed agreements yet.</p>
+{% endif %}
+
+<div style="margin-top: 30px;">
+    <a href="{{ url_for('admin_requests') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Requests</a>
+    <a href="{{ url_for('generate_link') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Generate Booking Link</a>
+</div>
+{% endblock %}
