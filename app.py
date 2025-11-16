@@ -130,6 +130,10 @@ def booking():
     
         # Add the current date to the data dictionary for the agreement template.
         data['today'] = datetime.date.today().strftime("%B %d, %Y")
+        
+        # Store the token back in data if it exists
+        if token:
+            data['token'] = token
 
         # Generate a unique ID for this agreement
         agreement_id = str(uuid.uuid4())
@@ -216,6 +220,16 @@ def admin_unsigned():
     unsigned = PreBooking.query.order_by(PreBooking.created_at.desc()).all()
     return render_template("admin_unsigned.html", unsigned=unsigned)
 
+@app.route("/admin/delete-unsigned/<token>", methods=["POST"])
+@auth.login_required
+def delete_unsigned(token):
+    """Delete an unsigned booking link."""
+    pre_booking = PreBooking.query.get_or_404(token)
+    db.session.delete(pre_booking)
+    db.session.commit()
+    flash("Unsigned booking link deleted successfully.", "success")
+    return redirect(url_for('admin_unsigned'))
+
 
 @app.route("/agreement/<agreement_id>")
 def agreement(agreement_id):
@@ -249,8 +263,10 @@ def sign_agreement(agreement_id):
         if pre_booking_to_delete:
             db.session.delete(pre_booking_to_delete)
     
+    # Delete the pending agreement
     db.session.delete(pending)
     db.session.commit()
+    
     signature_data_url = request.form.get("signature")
 
     with open("agreement_template.txt", "r") as f:
@@ -259,7 +275,7 @@ def sign_agreement(agreement_id):
     # Generate the PDF in memory
     pdf_buffer = create_agreement_pdf(agreement_data, template_text, signature_data_url)
     
-    # Get the raw bytes of the PDF. This is safer than passing the buffer around.
+    # Get the raw bytes of the PDF
     pdf_bytes = pdf_buffer.getvalue()
     pdf_buffer.close()
 
@@ -276,9 +292,7 @@ def sign_agreement(agreement_id):
     db.session.add(signed_agreement)
     db.session.commit()
     
-    print(f"Agreement saved to database: {filename}")
     flash("Agreement successfully signed and saved.", "success")
-
     return send_file(BytesIO(pdf_bytes), as_attachment=True, download_name=filename, mimetype='application/pdf')
 
 if __name__ == "__main__":
