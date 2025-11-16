@@ -116,12 +116,8 @@ def booking():
     if request.method == "POST":
         data = request.form.to_dict()
         
-       # If this booking came from a generated link, remove the temporary pre-booking data.
+        # Keep the token for later deletion when agreement is signed
         token = data.pop('token', None)
-        if token:
-            pre_booking_to_delete = PreBooking.query.get(token)
-            if pre_booking_to_delete:
-                db.session.delete(pre_booking_to_delete)
 
         if not data.get("name") or not data.get("email"):
             abort(400, "Name and email are required fields.")
@@ -213,6 +209,13 @@ def generate_link():
 
     return render_template("admin_generate.html")
 
+@app.route("/admin/unsigned")
+@auth.login_required
+def admin_unsigned():
+    """Admin page to view all unsigned agreements (active PreBooking tokens)."""
+    unsigned = PreBooking.query.order_by(PreBooking.created_at.desc()).all()
+    return render_template("admin_unsigned.html", unsigned=unsigned)
+
 
 @app.route("/agreement/<agreement_id>")
 def agreement(agreement_id):
@@ -238,6 +241,14 @@ def sign_agreement(agreement_id):
         abort(404, "Agreement not found or has expired.")
 
     agreement_data = pending.data
+    
+    # Delete the PreBooking token if it exists
+    token = agreement_data.get('token')
+    if token:
+        pre_booking_to_delete = PreBooking.query.get(token)
+        if pre_booking_to_delete:
+            db.session.delete(pre_booking_to_delete)
+    
     db.session.delete(pending)
     db.session.commit()
     signature_data_url = request.form.get("signature")

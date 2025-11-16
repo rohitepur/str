@@ -4,5 +4,5 @@ Flask-SQLAlchemy
 python-dotenv
 fpdf
 gunicorn
-psycopg2-binary==2.9.7
+psycopg2-binary
 Werkzeug
