@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Calendar View{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Booking Calendar</h2>
+            <div class="mb-3">
+                <span class="badge bg-danger me-2">■ Booking Requests</span>
+                <span class="badge bg-warning me-2">■ Unsigned Agreements</span>
+                <span class="badge" style="background-color: #ffc107; color: black;">■ Pending Agreements</span>
+                <span class="badge bg-success">■ Signed Agreements</span>
+            </div>
+            <div id="calendar"></div>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div style="margin-top: 30px;">
+                <a href="{{ url_for('admin_requests') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Requests</a>
+                <a href="{{ url_for('admin_agreements') }}" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Agreements</a>
+                <a href="{{ url_for('admin_unsigned') }}" style="background-color: #ffc107; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Unsigned Agreements</a>
+                <a href="{{ url_for('generate_link') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Generate Booking Link</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css' rel='stylesheet' />
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,listWeek'
+        },
+        events: '/api/calendar-events',
+        eventClick: function(info) {
+            var event = info.event;
+            var details = `
+                <strong>Name:</strong> ${event.extendedProps.name}<br>
+                <strong>Type:</strong> ${event.extendedProps.type}<br>
+                <strong>Check-in:</strong> ${event.start.toLocaleDateString()}<br>
+                <strong>Check-out:</strong> ${event.end ? event.end.toLocaleDateString() : 'N/A'}<br>
+            `;
+            if (event.extendedProps.email) {
+                details += `<strong>Email:</strong> ${event.extendedProps.email}<br>`;
+            }
+            
+            alert(details);
+        },
+        height: 'auto',
+        eventDisplay: 'block'
+    });
+    calendar.render();
+});
+</script>
+{% endblock %}

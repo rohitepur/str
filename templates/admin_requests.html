@@ -40,6 +40,7 @@
 {% endif %}
 
 <div style="margin-top: 30px;">
+    <a href="{{ url_for('admin_calendar') }}" style="background-color: #6f42c1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Calendar View</a>
     <a href="{{ url_for('admin_agreements') }}" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Agreements</a>
     <a href="{{ url_for('admin_unsigned') }}" style="background-color: #ffc107; color: black; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Unsigned Agreements</a>
     <a href="{{ url_for('generate_link') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Generate Booking Link</a>

@@ -1,6 +1,6 @@
 Flask
 Flask-HTTPAuth
-Flask-SQLAlchemy
+pymongo
 python-dotenv
 fpdf
 gunicorn

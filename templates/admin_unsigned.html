@@ -2,6 +2,16 @@
 {% block content %}
 <h2>Unsigned Agreements</h2>
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
 {% if unsigned %}
 <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
     <thead>
@@ -21,16 +31,16 @@
             <td style="border: 1px solid #ddd; padding: 12px;">{{ item.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">{{ item.data.get('name', 'N/A') }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">{{ item.data.get('email', 'N/A') }}</td>
-            <td style="border: 1px solid #ddd; padding: 12px;">{{ item.data.get('check_in_date', 'N/A') }}</td>
-            <td style="border: 1px solid #ddd; padding: 12px;">{{ item.data.get('check_out_date', 'N/A') }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ item.check_in_date or 'N/A' }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ item.check_out_date or 'N/A' }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">
-                <a href="{{ url_for('guest_booking', token=item.token) }}" target="_blank" 
+                <a href="{{ url_for('guest_booking', token=item._id) }}" target="_blank" 
                    style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 12px;">
                    View Link
                 </a>
             </td>
             <td style="border: 1px solid #ddd; padding: 12px;">
-                <form method="POST" action="{{ url_for('delete_unsigned', token=item.token) }}" style="display: inline;" 
+                <form method="POST" action="{{ url_for('delete_unsigned', token=item._id) }}" style="display: inline;" 
                       onsubmit="return confirm('Are you sure you want to delete this booking link?');">
                     <button type="submit" style="background-color: #dc3545; color: white; padding: 5px 10px; border: none; border-radius: 3px; font-size: 12px; cursor: pointer;">
                         Delete
@@ -46,6 +56,7 @@
 {% endif %}
 
 <div style="margin-top: 30px;">
+    <a href="{{ url_for('admin_calendar') }}" style="background-color: #6f42c1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">Calendar View</a>
     <a href="{{ url_for('admin_requests') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Requests</a>
     <a href="{{ url_for('admin_agreements') }}" style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-right: 10px;">View Agreements</a>
     <a href="{{ url_for('generate_link') }}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Generate Booking Link</a>
