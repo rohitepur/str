@@ -22,7 +22,14 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # --- DATABASE SETUP ---
-client = MongoClient(os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/'))
+client = MongoClient(
+    os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/'),
+    tls=True,
+    tlsAllowInvalidCertificates=True,
+    serverSelectionTimeoutMS=5000,
+    connectTimeoutMS=5000,
+    socketTimeoutMS=5000
+)
 db = client.str_property
 
 
