@@ -16,12 +16,12 @@
     <tbody>
         {% for agreement in agreements %}
         <tr>
-            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.created_at.strftime('%Y-%m-%d %H:%M') if agreement.created_at else 'N/A' }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.name }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.email }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">{{ agreement.filename }}</td>
             <td style="border: 1px solid #ddd; padding: 12px;">
-                <a href="{{ url_for('download_agreement', agreement_id=agreement.id) }}" 
+                <a href="{{ url_for('download_agreement', agreement_id=agreement._id) }}" 
                    style="background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 12px;">
                    Download PDF
                 </a>

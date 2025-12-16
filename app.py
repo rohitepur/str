@@ -171,7 +171,14 @@ def admin_agreements():
 @auth.login_required
 def download_agreement(agreement_id):
     """Download a signed agreement PDF."""
-    agreement = signed_agreements.find_one({'_id': ObjectId(agreement_id)})
+    try:
+        # Try ObjectId first, then string
+        agreement = signed_agreements.find_one({'_id': ObjectId(agreement_id)})
+        if not agreement:
+            agreement = signed_agreements.find_one({'_id': agreement_id})
+    except:
+        agreement = signed_agreements.find_one({'_id': agreement_id})
+    
     if not agreement:
         abort(404)
     return send_file(
